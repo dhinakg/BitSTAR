@@ -109,6 +109,8 @@ async def on_ready():
 
     # Set the game.
     await client.change_presence(game=discord.Game(name="with magic"))
+    await client.change_presence(game=discord.Game(name="with magic"))
+
 
 
 @client.event
