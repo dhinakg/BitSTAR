@@ -337,5 +337,5 @@ async def onCommand(message_in):
         os._exit(1)
 
     if message_in.command == 'listservers':
-        print(Bot.guilds)
-        return message.Message(body=Bot.guilds)
+        print(Bot.client.servers)
+        return message.Message(body=Bot.client.servers)
