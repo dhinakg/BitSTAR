@@ -333,5 +333,5 @@ async def onCommand(message_in):
         return message.Message(body='Rebooting...')
 
     if message_in.command == 'listservers':
-        print(Bot.bot.guilds)
-        return message.Message(body=Bot.bot.guilds)
+        print(Bot.guilds)
+        return message.Message(body=Bot.guilds)
