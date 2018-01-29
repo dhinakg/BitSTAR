@@ -327,4 +327,4 @@ async def onCommand(message_in):
         return message.Message(body='PONG! Bot is up!')
     
     if message_in.command == 'restart':
-        os._exit()
+        os._exit(1)
