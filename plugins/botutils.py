@@ -30,9 +30,6 @@ from libs import progressBar, readableTime, displayname
 SERVERSCMD = "servers"
 NICKNAMECMD = "nickname"
 
-client = discord.Client()
-Bot.client = client
-
 
 def commands_detect_dups():
     duplicates = []
