@@ -76,10 +76,11 @@ def onInit(plugin_in):
     nickname_command   = command.Command(plugin_in, NICKNAMECMD, shortdesc="Change the bot's nickname")
     ping_command       = command.Command(plugin_in, 'ping', shortdesc='Pong!')
     restart_command    = command.Command(plugin_in, 'restart', shortdesc='Restart (and update) the bot')
+    listservers_command= command.Command(plugin_in, 'listservers', shortdesc='List the servers the bot is in')
     return plugin.Plugin(plugin_in, 'botutils', [plugins_command, commands_command, help_command, info_command, plugintree_command, uptime_command,
                                                  hostinfo_command, cpuinfo_command, setprefix_command, getprefix_command, speedtest_command, addowner_command,
                                                  owners_command, messages_command, servers_command, invite_command, nickname_command, ping_command, 
-                                                 restart_command])
+                                                 restart_command, listservers_command])
 
 async def onCommand(message_in):
     if message_in.command == 'plugins':
@@ -331,3 +332,5 @@ async def onCommand(message_in):
         os._exit(1)
         return message.Message(body='Rebooting...')
 
+    if message_in.command == 'listservers':
+        return message.Message(body=Bot.client.servers)
