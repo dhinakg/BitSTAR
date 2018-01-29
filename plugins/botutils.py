@@ -333,8 +333,7 @@ async def onCommand(message_in):
     
     if message_in.command == 'restart':
         print("Rebooting...")
-        # unfortunately, we have to invoke discord.py directly here
-        await client.send_message(message_in.channel, "Rebooting...")
+
         os._exit(1)
 
     if message_in.command == 'listservers':
