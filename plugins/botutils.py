@@ -340,4 +340,5 @@ async def onCommand(message_in):
             server_names += " {}".format(server.name)
         
         print(Bot.client.servers)
+        print(server_names)
         return message.Message(body=Bot.client.servers)
