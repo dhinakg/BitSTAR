@@ -340,5 +340,6 @@ async def onCommand(message_in):
         for server in Bot.client.servers:
             server_names += " {}".format(server.name)
             send += " {},".format(server.name)
+        send = send[:-1]
         
         return message.Message(send)
