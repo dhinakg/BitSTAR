@@ -336,9 +336,9 @@ async def onCommand(message_in):
     if message_in.command == 'listservers':
         # this from Sydney
         server_names = ""
+        send = "I am in" 
         for server in Bot.client.servers:
             server_names += " {}".format(server.name)
+            send += " {},".format(server.name)
         
-        print(Bot.client.servers)
-        print(server_names)
-        return message.Message(body=Bot.client.servers)
+        return message.Message(message)
