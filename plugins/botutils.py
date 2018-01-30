@@ -341,4 +341,4 @@ async def onCommand(message_in):
             server_names += " {}".format(server.name)
             send += " {},".format(server.name)
         
-        return message.Message(message)
+        return message.Message(send)
