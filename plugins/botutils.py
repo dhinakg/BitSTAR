@@ -348,6 +348,7 @@ async def onCommand(message_in):
 
     if message_in.command == 'changegame':
         await Bot.client.change_presence(game=discord.Game(name=message_in.body.strip()))
+        return message.Message(body='The game has been changed.')
 
         
         
