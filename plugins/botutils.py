@@ -78,10 +78,11 @@ def onInit(plugin_in):
     ping_command       = command.Command(plugin_in, 'ping', shortdesc='Pong!')
     restart_command    = command.Command(plugin_in, 'restart', shortdesc='Restart (and update) the bot')
     listservers_command= command.Command(plugin_in, 'listservers', shortdesc='List the servers the bot is in')
+    changegame_command = command.Command(plugin_in, 'changegame', shortdesc="Change the bot's game")
     return plugin.Plugin(plugin_in, 'botutils', [plugins_command, commands_command, help_command, info_command, plugintree_command, uptime_command,
                                                  hostinfo_command, cpuinfo_command, setprefix_command, getprefix_command, speedtest_command, addowner_command,
                                                  owners_command, messages_command, servers_command, invite_command, nickname_command, ping_command, 
-                                                 restart_command, listservers_command])
+                                                 restart_command, listservers_command, changegame_command])
 
 async def onCommand(message_in):
     if message_in.command == 'plugins':
@@ -344,3 +345,11 @@ async def onCommand(message_in):
         send = send + "."
         
         return message.Message(send)
+
+    if message_in.command == 'changegame':
+        client = discord.Client()
+        Bot.client = client
+        await client.change_presence(game=discord.Game(name=message_in.body.strip()))
+
+        
+        
