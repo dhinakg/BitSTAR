@@ -33,9 +33,15 @@ async def onCommand(message_in):
         msg = 'Usage: `{}calc [formula]`'.format('!')
         return message.Message(body=msg)
 
+    if formula.find("__") > -1 or formula.find("_") > -1 or formula.find("\"") > -1 or formula.find(".") > -1:
+        return message.Message(body="Not a valid math problem.")
+
     try:
         answer = eval(formula, {'__builtins__':{}, '__locals__':{}, '__globals__':{}})
     except Exception as e:
+        return message.Message(body="Not a valid math problem.")
+
+    if type(answer) != int:
         return message.Message(body="Not a valid math problem.")
 
     msg = '`{}` = `{}`'.format(formula, round(answer, 3))
