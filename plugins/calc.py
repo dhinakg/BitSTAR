@@ -28,21 +28,24 @@ async def onCommand(message_in):
     """Do some math."""
     formula = message_in.body
     formula = formula.replace('x', '*')
+    formula = formula.replace(' ', '')
 
     if formula == None:
         msg = 'Usage: `{}calc [formula]`'.format('!')
         return message.Message(body=msg)
 
-    if formula.find("__") > -1 or formula.find("_") > -1 or formula.find("\"") > -1 or formula.find(".") > -1:
-        return message.Message(body="Not a valid math problem.")
+    valid_chars = set('1234567890+-/*')
+    for char in formula:
+        if char not in valid_chars:
+            return message.Message(body="Invalid symbol: {}".format(char))
 
     try:
         answer = eval(formula, {'__builtins__':{}, '__locals__':{}, '__globals__':{}})
     except Exception as e:
         return message.Message(body="Not a valid math problem.")
 
-    if type(answer) != int:
-        return message.Message(body="Not a valid math problem.")
+    if type(answer) != int and type(answer) != float:
+        return message.Message(body="Calculator did not return a valid output.")
 
     msg = '`{}` = `{}`'.format(formula, round(answer, 3))
     # Say message
