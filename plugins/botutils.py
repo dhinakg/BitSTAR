@@ -20,7 +20,7 @@ import time
 
 import discord
 import psutil
-import pyspeedtest
+import speedtest
 
 from api import settings, logging, command, message, plugin, git
 from api.bot import Bot
@@ -241,10 +241,10 @@ async def onCommand(message_in):
 
     if message_in.command == 'speedtest':
         if settings.owners_check(message_in.author.id):
-            speed = pyspeedtest.SpeedTest()
+            speed = speedtest.Speedtest()
             msg = '**Speed Test Results:**\n'
             msg += '```\n'
-            msg += '    Ping: {}\n'.format(round(speed.ping(), 2))
+            # msg += '    Ping: {}\n'.format(round(speed.ping(), 2)) - disabled with new module switch
             msg += 'Download: {}MB/s\n'.format(round(speed.download()/1024/1024, 2))
             msg += '  Upload: {}MB/s```'.format(round(speed.upload()/1024/1024, 2))
             return message.Message(body=msg)
