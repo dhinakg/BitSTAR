@@ -331,9 +331,11 @@ async def onCommand(message_in):
         return message.Message(body='PONG! Bot is up!')
     
     if message_in.command == 'restart':
-        print("Rebooting...")
-
-        os._exit(1)
+        if settings.owners_check(message_in.author.id):
+            print("Rebooting...")
+            os._exit(1)
+        else:
+            return message.Message(body="You do not have permisison to reboot the bot.")
 
     if message_in.command == 'listservers':
         # this from Sydney
