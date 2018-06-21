@@ -242,6 +242,7 @@ async def onCommand(message_in):
     if message_in.command == 'speedtest':
         if settings.owners_check(message_in.author.id):
             speed = speedtest.Speedtest()
+            speed.get_best_server()
             msg = '**Speed Test Results:**\n'
             msg += '```\n'
             # msg += '    Ping: {}\n'.format(round(speed.ping(), 2)) - disabled with new module switch
