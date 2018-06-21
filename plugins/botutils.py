@@ -348,8 +348,11 @@ async def onCommand(message_in):
         return message.Message(send)
 
     if message_in.command == 'changegame':
-        await Bot.client.change_presence(game=discord.Game(name=message_in.body.strip()))
-        return message.Message(body='The game has been changed.')
+        if settings.owners_check(message_in.author.id):
+            await Bot.client.change_presence(game=discord.Game(name=message_in.body.strip()))
+            return message.Message(body='The game has been changed.')
+        else:
+            return message.Message(body="You do not have permisison to change the bot's game.")
 
         
         
