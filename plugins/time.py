@@ -99,7 +99,7 @@ async def onCommand(message_in):
             member = message_in.author
         else:
             # Try to get a user first
-            member = displayname.memberForName(memberOrOffset, message_in.server)
+            member = displayname.memberForName(memberOrOffset, message_in.server, me)
         
         if member:
             existingOffset = Table.search(OffsetTable, 'id', '{}'.format(member.id))
