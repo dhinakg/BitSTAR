@@ -22,15 +22,23 @@ def name(member : discord.Member):
         return name
     return None
 
-def memberForID(id, members)
-    # Check members.
+def memberForID(id, members, me):
+    # Check self first.
+    if me.id == id:
+        return me
+
+    # Check other members.
     for member in members:
         if member.id == id:
             return member
     return None
 
-def memberForName(name, members):
-    # Check members.
+def memberForName(name, members, me):
+    # Check self first.
+    if me.display_name.lower() == name.lower():
+        return me
+
+    # Check rest of members.
     for member in members:
         if member.display_name.lower() == name.lower():
             return member
