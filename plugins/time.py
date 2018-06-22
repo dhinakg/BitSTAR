@@ -30,6 +30,12 @@ async def onCommand(message_in):
     database.init()
     OffsetTable = Table('offsets', TableTypes.pGlobal)
     
+    # Get user.
+    if message_in.server:
+        me = message_in.server.me
+    else:
+        me = message_in.channel.me
+        
     if message_in.command == 'setoffset':
         # Normalize offset
 
