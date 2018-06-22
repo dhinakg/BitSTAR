@@ -1,5 +1,5 @@
 # Copyright (c) 2017 CorpNewt
-# 
+#
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
@@ -22,30 +22,22 @@ def name(member : discord.Member):
         return name
     return None
 
-def memberForID(id, members, me):
-    # Check self first.
-    if me.id == id:
-        return me
-
-    # Check other members.
+def memberForID(id, members):
+    # Check members.
     for member in members:
         if member.id == id:
             return member
     return None
 
-def memberForName(name, members, me):
-    # Check self first.
-    if me.display_name.lower() == name.lower():
-        return me
-
-    # Check rest of members.
+def memberForName(name, members):
+    # Check members.
     for member in members:
         if member.display_name.lower() == name.lower():
             return member
 
     # No member yet - try ID
     memID = ''.join(list(filter(str.isdigit, name)))
-    newMem = memberForID(memID, members, me)
+    newMem = memberForID(memID, members)
     if newMem:
         return newMem
     return None
