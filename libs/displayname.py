@@ -29,7 +29,7 @@ def memberForID(id, members)
             return member
     return None
 
-def memberForName(name, members, me):
+def memberForName(name, members):
     # Check members.
     for member in members:
         if member.display_name.lower() == name.lower():
