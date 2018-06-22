@@ -1,11 +1,11 @@
 #    Copyright 2017 Starbot Discord Project
-# 
+#
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
 #    You may obtain a copy of the License at
-# 
+#
 #        http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 #    Unless required by applicable law or agreed to in writing, software
 #    distributed under the License is distributed on an "AS IS" BASIS,
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -81,10 +81,17 @@ def onInit(plugin_in):
     changegame_command = command.Command(plugin_in, 'changegame', shortdesc="Change the bot's game")
     return plugin.Plugin(plugin_in, 'botutils', [plugins_command, commands_command, help_command, info_command, plugintree_command, uptime_command,
                                                  hostinfo_command, cpuinfo_command, setprefix_command, getprefix_command, speedtest_command, addowner_command,
-                                                 owners_command, messages_command, servers_command, invite_command, nickname_command, ping_command, 
+                                                 owners_command, messages_command, servers_command, invite_command, nickname_command, ping_command,
                                                  restart_command, listservers_command, changegame_command])
 
 async def onCommand(message_in):
+
+    # Get user.
+    if message_in.server:
+        me = message_in.server.me
+    else:
+        me = message_in.channel.me
+
     if message_in.command == 'plugins':
         plugin_list = []
         for plugin_in in Bot.plugins:
@@ -257,7 +264,7 @@ async def onCommand(message_in):
             try:
                 if settings.owners_check(message_in.author.id):
                     member = message_in.body.strip()
-                    new_member = displayname.memberForName(member, message_in.server)
+                    new_member = displayname.memberForName(member, message_in.server, me)
 
                     if settings.owners_check(new_member.id):
                         return message.Message(body="User is already an owner.")
@@ -279,7 +286,7 @@ async def onCommand(message_in):
         if not settings.owners_get():
             return message.Message(body='I have no owners')
         for owner in settings.owners_get():
-            user = displayname.memberForID(str(owner), message_in.server)
+            user = displayname.memberForID(str(owner), message_in.server, me)
             if user:
                 owners.append(str(user.name))
             else:
@@ -329,7 +336,7 @@ async def onCommand(message_in):
 
     if message_in.command == 'ping':
         return message.Message(body='PONG! Bot is up!')
-    
+
     if message_in.command == 'restart':
         if settings.owners_check(message_in.author.id):
             print("Rebooting...")
@@ -340,13 +347,13 @@ async def onCommand(message_in):
     if message_in.command == 'listservers':
         # this from Sydney
         server_names = ""
-        send = "I am in" 
+        send = "I am in"
         for server in Bot.client.servers:
             server_names += " {}".format(server.name)
             send += " {},".format(server.name)
         send = send[:-1]
         send = send + "."
-        
+
         return message.Message(send)
 
     if message_in.command == 'changegame':
@@ -355,6 +362,3 @@ async def onCommand(message_in):
             return message.Message(body='The game has been changed.')
         else:
             return message.Message(body="You do not have permisison to change the bot's game.")
-
-        
-        
