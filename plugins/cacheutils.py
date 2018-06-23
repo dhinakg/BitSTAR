@@ -39,7 +39,7 @@ async def onCommand(message_in):
         cache_str = ''
         for cmd in bot.Bot.commands:
             cmd_cache_size = len(glob.glob('cache/{}_*'.format(cmd.name)))
-            if cmd_cache_size = 0:
+            if cmd_cache_size == 0:
                 return message.Message(body='No caches.')
             elif cmd_cache_size > 0:
                 cache_str += '{} - {}\n'.format(cmd.name, cmd_cache_size)
