@@ -1,11 +1,11 @@
 #    Copyright 2017 Starbot Discord Project
-# 
+#
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
 #    You may obtain a copy of the License at
-# 
+#
 #        http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 #    Unless required by applicable law or agreed to in writing, software
 #    distributed under the License is distributed on an "AS IS" BASIS,
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -104,7 +104,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print("------")
-    print("Bot Invite Link: " + "https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=8")
+    print("Bot Invite Link: " + "https://discordapp.com/oauth2/authorize?client_id=" + str(client.user.id) + "&scope=bot&permissions=8")
     print("------")
 
     # Set the game.
@@ -160,7 +160,7 @@ async def on_message(message_in):
             message_recv = message.Message
             message_recv.command = command.name
             if message_in.content.startswith("{} ".format(me.mention)):
-                message_recv.body = message_in.content.split("{} ".format(me.mention) + 
+                message_recv.body = message_in.content.split("{} ".format(me.mention) +
                                                              command.name, 1)[1]
             else:
                 message_recv.body = message_in.content.split(prefix + command.name, 1)[1]
