@@ -44,4 +44,7 @@ async def onCommand(message_in):
         return message.Message(body='```{}```'.format(cache_str))
 
     if message_in.command == 'totalcache':
-        return message.Message(body='```{}```'.format(len(glob.glob('cache/*'))))
+        if glob.glob('cache/README.MD'):
+            return message.Message(body='```{}```'.format(len(glob.glob('cache/*')) - 1))
+        else:
+            return message.Message(body='```{}```'.format(len(glob.glob('cache/*'))))
